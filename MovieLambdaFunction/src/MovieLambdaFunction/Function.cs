@@ -21,16 +21,9 @@ public class Function
     // Console.WriteLine($"The request query string parameters are: {request.QueryStringParameters}");
     // Console.WriteLine($"The request http method is: {request.RequestContext.Http.Method}");
 
+		// TODO: Implement database connection and query here
 
-    // var response = new APIGatewayHttpApiV2ProxyResponse
-    // {
-    //   StatusCode = (int)HttpStatusCode.OK,
-    //   // json body
-    //   Body = System.Text.Json.JsonSerializer.Serialize(new { message = "Hello World" }),
-    //   Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
-    // };
 
-    // return response;
 
     var response = new APIGatewayHttpApiV2ProxyResponse
     {
