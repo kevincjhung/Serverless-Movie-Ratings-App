@@ -1,0 +1,17 @@
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/net7.0/linux-x64/MovieLambdaFunction.deps.json
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/net7.0/linux-x64/MovieLambdaFunction.runtimeconfig.json
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/net7.0/linux-x64/MovieLambdaFunction.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/net7.0/linux-x64/MovieLambdaFunction.pdb
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/net7.0/linux-x64/Amazon.Lambda.Core.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/net7.0/linux-x64/Amazon.Lambda.Serialization.SystemTextJson.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/MovieLambdaFunction.csproj.AssemblyReference.cache
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/MovieLambdaFunction.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/MovieLambdaFunction.AssemblyInfoInputs.cache
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/MovieLambdaFunction.AssemblyInfo.cs
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/MovieLambdaFunction.csproj.CoreCompileInputs.cache
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/MovieLambdaFunction.csproj.CopyComplete
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/MovieLambdaFunction.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/refint/MovieLambdaFunction.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/MovieLambdaFunction.pdb
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/MovieLambdaFunction.genruntimeconfig.cache
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Release/net7.0/linux-x64/ref/MovieLambdaFunction.dll
