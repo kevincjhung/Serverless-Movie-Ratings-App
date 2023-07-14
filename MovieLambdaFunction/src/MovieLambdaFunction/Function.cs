@@ -1,6 +1,7 @@
 using Amazon.Lambda.Core;
 using System.Net;
 using Amazon.Lambda.APIGatewayEvents;
+using Microsoft.EntityFrameworkCore;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(
@@ -11,26 +12,34 @@ namespace MovieLambdaFunction;
 
 public class Function
 {
-  public APIGatewayHttpApiV2ProxyResponse FunctionHandler(
-    APIGatewayHttpApiV2ProxyRequest request,
-    ILambdaContext context
-  )
+	DatabaseContext	dbContext;
+
+  // Constructor to override, and set up database connection
+  public Function()
   {
-    // Console.WriteLine($"The request body is: {request.Body}");
-    // Console.WriteLine($"The request path parameters are: {request.PathParameters}");
-    // Console.WriteLine($"The request query string parameters are: {request.QueryStringParameters}");
-    // Console.WriteLine($"The request http method is: {request.RequestContext.Http.Method}");
+		// TODO: Connection string will be changed to ENV
+    // var connectionString = "Server=containers-us-west-38.railway.app;Port=6425;User Id=postgres;Password=P2VdpWJUTyGMVatXXyor;Database=railway";
+    var connectionString = "Host=containers-us-west-38.railway.app;Database=railway;Username=postgres;Password=P2VdpWJUTyGMVatXXyor;Port=6425";
+		
+		var ContextOptions = new DbContextOptionsBuilder<DatabaseContext>()
+			.UseNpgsql(connectionString)
+			.Options;
 
-		// TODO: Implement database connection and query here
+		// create a new instance of the DbContext class
+		dbContext = new DatabaseContext(ContextOptions);
+	}
 
-
-
-    var response = new APIGatewayHttpApiV2ProxyResponse
+  public APIGatewayHttpApiV2ProxyResponse FunctionHandler( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context )
+	{
+    var movies = dbContext.Movies.ToList();
+		
+		var response = new APIGatewayHttpApiV2ProxyResponse
     {
       StatusCode = (int)HttpStatusCode.OK,
-      Body = System.Text.Json.JsonSerializer.Serialize(new { message = "Hello World" }),
+      Body = System.Text.Json.JsonSerializer.Serialize(movies),
       Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
     };
-    return response;
+    
+		return response;
   }
 }

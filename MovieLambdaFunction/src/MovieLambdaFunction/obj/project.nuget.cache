@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PDj61Q1805UZQ3M56XEB6UafUKOH1mxiyoF92cGn4pkJXRUTF+tvfd/etl7qXVsmOjMnVRHt0qtnr5fbmWhreA==",
+  "dgSpecHash": "YCUUZYVTbOE52g/yCyMiqdJOZwfVYkCst/0a1UriNd5AqueQGDZDlMSZw4d95/4lqONHx7q3/tIl2t087oOj7Q==",
   "success": true,
   "projectFilePath": "/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/MovieLambdaFunction.csproj",
   "expectedPackageFiles": [
@@ -27,6 +27,8 @@
     "/Users/kevincjhung/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "/Users/kevincjhung/.nuget/packages/npgsql/7.0.4/npgsql.7.0.4.nupkg.sha512",
     "/Users/kevincjhung/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.4/npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
+    "/Users/kevincjhung/.nuget/packages/microsoft.netcore.app.runtime.linux-arm64/7.0.3/microsoft.netcore.app.runtime.linux-arm64.7.0.3.nupkg.sha512",
+    "/Users/kevincjhung/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-arm64/7.0.3/microsoft.aspnetcore.app.runtime.linux-arm64.7.0.3.nupkg.sha512",
     "/Users/kevincjhung/.nuget/packages/microsoft.netcore.app.crossgen2.osx-arm64/7.0.3/microsoft.netcore.app.crossgen2.osx-arm64.7.0.3.nupkg.sha512"
   ],
   "logs": []
