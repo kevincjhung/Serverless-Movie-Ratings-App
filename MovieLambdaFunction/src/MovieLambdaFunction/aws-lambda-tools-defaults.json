@@ -9,7 +9,7 @@
   "region": "ca-central-1",
   "configuration": "Release",
   "package-type": "image",
-  "function-memory-size": 1024,
+  "function-memory-size": 512,
   "function-timeout": 30,
   "function-runtime": "dotnet7",
   "function-architecture": "arm64",

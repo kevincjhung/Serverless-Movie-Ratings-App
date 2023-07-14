@@ -15,3 +15,14 @@
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Debug/net7.0/MovieLambdaFunction.pdb
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Debug/net7.0/MovieLambdaFunction.genruntimeconfig.cache
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/obj/Debug/net7.0/ref/MovieLambdaFunction.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Amazon.Lambda.APIGatewayEvents.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Amazon.Lambda.ApplicationLoadBalancerEvents.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Amazon.Lambda.AspNetCoreServer.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Amazon.Lambda.AspNetCoreServer.Hosting.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Amazon.Lambda.Logging.AspNetCore.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Amazon.Lambda.RuntimeSupport.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Npgsql.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
