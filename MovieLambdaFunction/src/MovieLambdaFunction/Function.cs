@@ -17,8 +17,6 @@ public class Function
   // Constructor to override, and set up database connection
   public Function()
   {
-		// TODO: Connection string will be changed to ENV
-    // var connectionString = "Server=containers-us-west-38.railway.app;Port=6425;User Id=postgres;Password=P2VdpWJUTyGMVatXXyor;Database=railway";
     var connectionString = "Host=containers-us-west-38.railway.app;Database=railway;Username=postgres;Password=P2VdpWJUTyGMVatXXyor;Port=6425";
 		
 		var ContextOptions = new DbContextOptionsBuilder<DatabaseContext>()
@@ -32,14 +30,34 @@ public class Function
   public APIGatewayHttpApiV2ProxyResponse FunctionHandler( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context )
 	{
     var movies = dbContext.Movies.ToList();
-		
-		var response = new APIGatewayHttpApiV2ProxyResponse
+    var method = request.RequestContext.Http.Method;
+
+    switch(method)
+    {
+      case "GET":
+        return GetAllMovies(request, context);
+      default:
+        return new APIGatewayHttpApiV2ProxyResponse
+        {
+          StatusCode = (int)HttpStatusCode.OK,
+          Body = $"the request method is {method}"
+        };
+    }
+  }
+  
+  // get all movies from database
+  public APIGatewayHttpApiV2ProxyResponse GetAllMovies( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context )
+  {
+    var movies = dbContext.Movies.ToList();
+    var method = request.RequestContext.Http.Method;
+
+    var response = new APIGatewayHttpApiV2ProxyResponse
     {
       StatusCode = (int)HttpStatusCode.OK,
       Body = System.Text.Json.JsonSerializer.Serialize(movies),
       Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
     };
     
-		return response;
+    return response;
   }
 }
