@@ -18,7 +18,6 @@ public class Function
   public Function()
   {
     DotNetEnv.Env.Load();
-    // var connectionString = "Host=containers-us-west-38.railway.app;Database=railway;Username=postgres;Password=P2VdpWJUTyGMVatXXyor;Port=6425";
 
     var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 		
