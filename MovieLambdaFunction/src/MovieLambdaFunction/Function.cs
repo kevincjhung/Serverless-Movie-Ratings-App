@@ -22,37 +22,40 @@ public class Function
         var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 
         var ContextOptions = new DbContextOptionsBuilder<DatabaseContext>()
-        	.UseNpgsql(connectionString)
-        	.Options;
+            .UseNpgsql(connectionString)
+            .Options;
 
         dbContext = new DatabaseContext(ContextOptions);
     }
 
-    public APIGatewayHttpApiV2ProxyResponse FunctionHandler(APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context)
+    public APIGatewayHttpApiV2ProxyResponse FunctionHandler(
+        APIGatewayHttpApiV2ProxyRequest request,
+        ILambdaContext context
+    )
     {
         var routekey = request.RouteKey;
         var method = request.RequestContext.Http.Method;
 
         switch (routekey)
         {
-            case "GET /movies":             
+            case "GET /movies":
                 return GetAllMovies(request, context);
-            case "GET /movies/{id}":        
+            case "GET /movies/{id}":
                 return GetMovie(request, context);
-            case "POST /movies":            
+            case "POST /movies":
                 return AddMovie(request, context);
-            case "PUT /movies/{id}":        
+            case "PUT /movies/{id}":
                 return EditMovie(request, context);
-            case "DELETE /movies/{id}":     
+            case "DELETE /movies/{id}":
                 return DeleteMovie(request, context);
-        //     case "get /movies/{id}/ratings":
-        //     // return GetMovieRatings(request, context);
-        //     case "POST /movies/{id}/ratings":
-        //     // return AddMovieRatings(request, context);
-        //     case "PUT /movies/{id}/ratings":
-        //     // return EditMovieRatings(request, context);
-        //     case "DELETE /movies/{id}/ratings":
-        //     // return DeleteMovieRatings(request, context);
+            //     case "get /movies/{id}/ratings":
+            //     // return GetMovieRatings(request, context);
+            //     case "POST /movies/{id}/ratings":
+            //     // return AddMovieRatings(request, context);
+            //     case "PUT /movies/{id}/ratings":
+            //     // return EditMovieRatings(request, context);
+            //     case "DELETE /movies/{id}/ratings":
+            //     // return DeleteMovieRatings(request, context);
             default:
                 return new APIGatewayHttpApiV2ProxyResponse
                 {
@@ -60,11 +63,13 @@ public class Function
                     Body = System.Text.Json.JsonSerializer.Serialize(request)
                 };
         }
-
     }
 
     // get all movies from database
-    public APIGatewayHttpApiV2ProxyResponse GetAllMovies(APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context)
+    public APIGatewayHttpApiV2ProxyResponse GetAllMovies(
+        APIGatewayHttpApiV2ProxyRequest request,
+        ILambdaContext context
+    )
     {
         var movies = dbContext.Movies.ToList();
         var method = request.RequestContext.Http.Method;
@@ -79,13 +84,17 @@ public class Function
         return response;
     }
 
-    // get a single movie based on the UUID primary key 
-    public APIGatewayHttpApiV2ProxyResponse GetMovie ( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context ){
+    // get a single movie based on the UUID primary key
+    public APIGatewayHttpApiV2ProxyResponse GetMovie(
+        APIGatewayHttpApiV2ProxyRequest request,
+        ILambdaContext context
+    )
+    {
         var movieId = request.PathParameters["id"];
-        
+
         // convert movieId into a GUID
         Guid guidMovieId = Guid.Parse(movieId);
-        
+
         var movie = dbContext.Movies.Find(guidMovieId);
 
         if (movie == null)
@@ -97,7 +106,6 @@ public class Function
             };
         }
 
-
         var response = new APIGatewayHttpApiV2ProxyResponse
         {
             StatusCode = (int)HttpStatusCode.OK,
@@ -108,7 +116,11 @@ public class Function
         return response;
     }
 
-    public APIGatewayHttpApiV2ProxyResponse AddMovie ( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context ){
+    public APIGatewayHttpApiV2ProxyResponse AddMovie(
+        APIGatewayHttpApiV2ProxyRequest request,
+        ILambdaContext context
+    )
+    {
         var movieData = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
 
         // TODO: refactor validation logic
@@ -122,7 +134,7 @@ public class Function
                 Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie data")
             };
         }
-        
+
         // if no movie title was given, return an error
         if (movieData.Title == null)
         {
@@ -147,18 +159,71 @@ public class Function
         dbContext.SaveChanges();
 
         return new APIGatewayHttpApiV2ProxyResponse
-            {
-                StatusCode = (int)HttpStatusCode.OK,
-                Body = System.Text.Json.JsonSerializer.Serialize(movieData)
-            };
+        {
+            StatusCode = (int)HttpStatusCode.OK,
+            Body = System.Text.Json.JsonSerializer.Serialize(movieData)
+        };
     }
+    
+    // public APIGatewayHttpApiV2ProxyResponse AddMovie(
+    //     APIGatewayHttpApiV2ProxyRequest request,
+    //     ILambdaContext context
+    // )
+    // {
+    //     var movieData = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
 
-    public APIGatewayHttpApiV2ProxyResponse EditMovie ( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context ){
+    //     // TODO: refactor validation logic
+
+    //     // if no movieData in body of request, return an error
+    //     if (movieData == null)
+    //     {
+    //         return new APIGatewayHttpApiV2ProxyResponse
+    //         {
+    //             StatusCode = (int)HttpStatusCode.BadRequest,
+    //             Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie data")
+    //         };
+    //     }
+
+    //     // if no movie title was given, return an error
+    //     if (movieData.Title == null)
+    //     {
+    //         return new APIGatewayHttpApiV2ProxyResponse
+    //         {
+    //             StatusCode = (int)HttpStatusCode.BadRequest,
+    //             Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie title")
+    //         };
+    //     }
+
+    //     // if no description was given, return an error
+    //     if (movieData.Description == null)
+    //     {
+    //         return new APIGatewayHttpApiV2ProxyResponse
+    //         {
+    //             StatusCode = (int)HttpStatusCode.BadRequest,
+    //             Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie description")
+    //         };
+    //     }
+
+    //     dbContext.Movies.Add(movieData);
+    //     dbContext.SaveChanges();
+
+    //     return new APIGatewayHttpApiV2ProxyResponse
+    //     {
+    //         StatusCode = (int)HttpStatusCode.OK,
+    //         Body = System.Text.Json.JsonSerializer.Serialize(movieData)
+    //     };
+    // }
+
+    public APIGatewayHttpApiV2ProxyResponse EditMovie(
+        APIGatewayHttpApiV2ProxyRequest request,
+        ILambdaContext context
+    )
+    {
         // the new movie data as provided in the body of the request
         var newMovieData = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
 
         var movieId = request.PathParameters["id"];
-    
+
         // if no newMovieData in body of request, return an error
         if (newMovieData == null)
         {
@@ -168,7 +233,7 @@ public class Function
                 Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie data")
             };
         }
-        
+
         // if no movie title was given, return an error
         if (newMovieData.Title == null)
         {
@@ -210,7 +275,11 @@ public class Function
         {
             if (propertyInfo.GetValue(newMovieData, null) != null)
             {
-                propertyInfo.SetValue(currentMovieData, propertyInfo.GetValue(newMovieData, null), null);
+                propertyInfo.SetValue(
+                    currentMovieData,
+                    propertyInfo.GetValue(newMovieData, null),
+                    null
+                );
             }
         }
 
@@ -221,22 +290,26 @@ public class Function
         dbContext.SaveChanges();
 
         return new APIGatewayHttpApiV2ProxyResponse
-            {
-                StatusCode = (int)HttpStatusCode.OK,
-                Body = System.Text.Json.JsonSerializer.Serialize(newMovieData)
-            };
+        {
+            StatusCode = (int)HttpStatusCode.OK,
+            Body = System.Text.Json.JsonSerializer.Serialize(newMovieData)
+        };
     }
 
-     public APIGatewayHttpApiV2ProxyResponse DeleteMovie ( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context ){
+    public APIGatewayHttpApiV2ProxyResponse DeleteMovie(
+        APIGatewayHttpApiV2ProxyRequest request,
+        ILambdaContext context
+    )
+    {
         var movieId = request.PathParameters["id"];
-        
+
         // convert movieId into a GUID
         Guid guidMovieId = Guid.Parse(movieId);
 
-        // check if a movie with that given Id exists 
+        // check if a movie with that given Id exists
         var movie = dbContext.Movies.Find(guidMovieId);
 
-        // if it exists, delete it 
+        // if it exists, delete it
         if (movie != null)
         {
             dbContext.Movies.Remove(movie);
@@ -245,9 +318,9 @@ public class Function
 
         // return a response
         return new APIGatewayHttpApiV2ProxyResponse
-            {
-                StatusCode = (int)HttpStatusCode.OK,
-                Body = System.Text.Json.JsonSerializer.Serialize(movie)
-            };
+        {
+            StatusCode = (int)HttpStatusCode.OK,
+            Body = System.Text.Json.JsonSerializer.Serialize(movie)
+        };
     }
 }
