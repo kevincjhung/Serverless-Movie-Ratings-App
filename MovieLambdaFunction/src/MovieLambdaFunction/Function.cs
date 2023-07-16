@@ -14,51 +14,76 @@ public class Function
 {
 	DatabaseContext	dbContext;
 
-  // Constructor to override, and set up database connection
   public Function()
   {
-    DotNetEnv.Env.Load();
+    // DotNetEnv.Env.Load();
 
-    var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
+    // var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 		
-		var ContextOptions = new DbContextOptionsBuilder<DatabaseContext>()
-			.UseNpgsql(connectionString)
-			.Options;
+		// var ContextOptions = new DbContextOptionsBuilder<DatabaseContext>()
+		// 	.UseNpgsql(connectionString)
+		// 	.Options;
 
-		dbContext = new DatabaseContext(ContextOptions);
+		// dbContext = new DatabaseContext(ContextOptions);
 	}
 
   public APIGatewayHttpApiV2ProxyResponse FunctionHandler( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context )
 	{
-    var movies = dbContext.Movies.ToList();
-    var method = request.RequestContext.Http.Method;
+    // var movies = dbContext.Movies.ToList();
+    // var method = request.RequestContext.Http.Method;
 
-    switch(method)
-    {
-      case "GET":
-        return GetAllMovies(request, context);
-      default:
-        return new APIGatewayHttpApiV2ProxyResponse
+    // get query params
+    // var queryParams = request.QueryStringParameters;
+
+
+    return new APIGatewayHttpApiV2ProxyResponse
         {
           StatusCode = (int)HttpStatusCode.OK,
-          Body = $"the request method is {method}"
+          Body = System.Text.Json.JsonSerializer.Serialize(request),
         };
-    }
+
+    // switch(method)
+    // {
+    //   case "GET":
+    //     return GetAllMovies(request, context);
+    //   default:
+    //     return new APIGatewayHttpApiV2ProxyResponse
+    //     {
+    //       StatusCode = (int)HttpStatusCode.OK,
+    //       Body = $"the request method is {method}"
+    //     };
+    // }
   }
   
   // get all movies from database
-  public APIGatewayHttpApiV2ProxyResponse GetAllMovies( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context )
-  {
-    var movies = dbContext.Movies.ToList();
-    var method = request.RequestContext.Http.Method;
+  // public APIGatewayHttpApiV2ProxyResponse GetAllMovies( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context )
+  // {
+  //   var movies = dbContext.Movies.ToList();
+  //   var method = request.RequestContext.Http.Method;
 
-    var response = new APIGatewayHttpApiV2ProxyResponse
-    {
-      StatusCode = (int)HttpStatusCode.OK,
-      Body = System.Text.Json.JsonSerializer.Serialize(movies),
-      Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
-    };
+  //   var response = new APIGatewayHttpApiV2ProxyResponse
+  //   {
+  //     StatusCode = (int)HttpStatusCode.OK,
+  //     Body = System.Text.Json.JsonSerializer.Serialize(movies),
+  //     Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
+  //   };
     
-    return response;
-  }
+  //   return response;
+  // }
+
+  // //get a single movie based on the UUID primary key
+  // public APIGatewayHttpApiV2ProxyResponse GetOneMovie ( APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context ){
+  //   var method = request.RequestContext.Http.Method;
+  //   var movieId = request.PathParameters["id"];
+  //   var movie = dbContext.Movies.Find(movieId);
+
+  //   var response = new APIGatewayHttpApiV2ProxyResponse
+  //   {
+  //     StatusCode = (int)HttpStatusCode.OK,
+  //     Body = System.Text.Json.JsonSerializer.Serialize(movie),
+  //     Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
+  //   };
+    
+  //   return response;
+  // }
 }
