@@ -26,3 +26,5 @@
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Npgsql.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/DotNetEnv.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Debug/net7.0/Sprache.dll
