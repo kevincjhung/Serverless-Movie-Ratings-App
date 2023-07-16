@@ -25,7 +25,6 @@ public class Function
 			.UseNpgsql(connectionString)
 			.Options;
 
-		// create a new instance of the DbContext class
 		dbContext = new DatabaseContext(ContextOptions);
 	}
 
