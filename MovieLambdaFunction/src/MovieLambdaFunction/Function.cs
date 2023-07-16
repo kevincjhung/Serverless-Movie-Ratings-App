@@ -35,15 +35,15 @@ public class Function
 
         switch (routekey)
         {
-            case "GET /movies":             // works
+            case "GET /movies":             
                 return GetAllMovies(request, context);
-            case "GET /movies/{id}":        // works
+            case "GET /movies/{id}":        
                 return GetMovie(request, context);
-            case "POST /movies":            // works
+            case "POST /movies":            
                 return AddMovie(request, context);
-            case "PUT /movies/{id}":        // works
+            case "PUT /movies/{id}":        
                 return EditMovie(request, context);
-            case "DELETE /movies/{id}":     // works
+            case "DELETE /movies/{id}":     
                 return DeleteMovie(request, context);
         //     case "get /movies/{id}/ratings":
         //     // return GetMovieRatings(request, context);
