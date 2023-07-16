@@ -9,9 +9,11 @@
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/Amazon.Lambda.Logging.AspNetCore.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/Amazon.Lambda.RuntimeSupport.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/Amazon.Lambda.Serialization.SystemTextJson.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/DotNetEnv.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/Microsoft.EntityFrameworkCore.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/Npgsql.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/Sprache.dll
 /Users/kevincjhung/Documents/GitHub/portfolio/bcit_projects/Serverless-Movie-Ratings-App/MovieLambdaFunction/src/MovieLambdaFunction/bin/Release/lambda-publish/MovieLambdaFunction.dll
