@@ -48,8 +48,8 @@ public class Function
                 return EditMovie(request, context);
             case "DELETE /movies/{id}":
                 return DeleteMovie(request, context);
-            //     case "get /movies/{id}/ratings":
-            //     // return GetMovieRatings(request, context);
+            // case "get /movies/{id}/ratings":
+            //     return GetMovieRatings(request, context);
             //     case "POST /movies/{id}/ratings":
             //     // return AddMovieRatings(request, context);
             //     case "PUT /movies/{id}/ratings":
@@ -165,55 +165,7 @@ public class Function
         };
     }
     
-    // public APIGatewayHttpApiV2ProxyResponse AddMovie(
-    //     APIGatewayHttpApiV2ProxyRequest request,
-    //     ILambdaContext context
-    // )
-    // {
-    //     var movieData = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
-
-    //     // TODO: refactor validation logic
-
-    //     // if no movieData in body of request, return an error
-    //     if (movieData == null)
-    //     {
-    //         return new APIGatewayHttpApiV2ProxyResponse
-    //         {
-    //             StatusCode = (int)HttpStatusCode.BadRequest,
-    //             Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie data")
-    //         };
-    //     }
-
-    //     // if no movie title was given, return an error
-    //     if (movieData.Title == null)
-    //     {
-    //         return new APIGatewayHttpApiV2ProxyResponse
-    //         {
-    //             StatusCode = (int)HttpStatusCode.BadRequest,
-    //             Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie title")
-    //         };
-    //     }
-
-    //     // if no description was given, return an error
-    //     if (movieData.Description == null)
-    //     {
-    //         return new APIGatewayHttpApiV2ProxyResponse
-    //         {
-    //             StatusCode = (int)HttpStatusCode.BadRequest,
-    //             Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie description")
-    //         };
-    //     }
-
-    //     dbContext.Movies.Add(movieData);
-    //     dbContext.SaveChanges();
-
-    //     return new APIGatewayHttpApiV2ProxyResponse
-    //     {
-    //         StatusCode = (int)HttpStatusCode.OK,
-    //         Body = System.Text.Json.JsonSerializer.Serialize(movieData)
-    //     };
-    // }
-
+    
     public APIGatewayHttpApiV2ProxyResponse EditMovie(
         APIGatewayHttpApiV2ProxyRequest request,
         ILambdaContext context
@@ -323,4 +275,6 @@ public class Function
             Body = System.Text.Json.JsonSerializer.Serialize(movie)
         };
     }
+
+
 }
