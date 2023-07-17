@@ -48,14 +48,14 @@ public class Function
                 return EditMovie(request, context);
             case "DELETE /movies/{id}":
                 return DeleteMovie(request, context);
-            // case "get /movies/{id}/ratings":
-            //     return GetMovieRatings(request, context);
-            //     case "POST /movies/{id}/ratings":
-            //     // return AddMovieRatings(request, context);
-            //     case "PUT /movies/{id}/ratings":
-            //     // return EditMovieRatings(request, context);
-            //     case "DELETE /movies/{id}/ratings":
-            //     // return DeleteMovieRatings(request, context);
+            case "GET /movies/{id}/ratings":
+                return GetMovieRatings(request, context);
+            case "POST /movies/{id}/ratings":
+                return AddMovieRatings(request, context);
+            case "PUT /movies/{id}/ratings":
+                return EditMovieRatings(request, context);
+            // case "DELETE /movies/{id}/ratings":
+            //     return DeleteMovieRatings(request, context);
             default:
                 return new APIGatewayHttpApiV2ProxyResponse
                 {
@@ -164,8 +164,7 @@ public class Function
             Body = System.Text.Json.JsonSerializer.Serialize(movieData)
         };
     }
-    
-    
+
     public APIGatewayHttpApiV2ProxyResponse EditMovie(
         APIGatewayHttpApiV2ProxyRequest request,
         ILambdaContext context
@@ -276,5 +275,133 @@ public class Function
         };
     }
 
+    public APIGatewayHttpApiV2ProxyResponse GetMovieRatings(
+        APIGatewayHttpApiV2ProxyRequest request,
+        ILambdaContext context
+    )
+    {
+        var movieId = request.PathParameters["id"];
 
+        // convert movieId into a GUID
+        Guid guidMovieId = Guid.Parse(movieId);
+
+        var movie = dbContext.Movies.Find(guidMovieId);
+
+        if (movie == null)
+        {
+            return new APIGatewayHttpApiV2ProxyResponse
+            {
+                StatusCode = (int)HttpStatusCode.BadRequest,
+                Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie ID")
+            };
+        }
+
+        var movieRating = movie.Rating;
+
+        var response = new APIGatewayHttpApiV2ProxyResponse
+        {
+            StatusCode = (int)HttpStatusCode.OK,
+            Body = System.Text.Json.JsonSerializer.Serialize(movieRating),
+            Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
+        };
+
+        return response;
+    }
+
+    public APIGatewayHttpApiV2ProxyResponse AddMovieRatings(
+        APIGatewayHttpApiV2ProxyRequest request,
+        ILambdaContext context
+    )
+    {
+        // the new movie rating passed in from the client
+        var newMovieRating = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
+    
+        var response = new APIGatewayHttpApiV2ProxyResponse
+        {
+            StatusCode = (int)HttpStatusCode.OK,
+            Body = System.Text.Json.JsonSerializer.Serialize("asjnaf"),
+            Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
+        };
+
+        return response;
+    }
+
+    public APIGatewayHttpApiV2ProxyResponse EditMovieRatings(
+        APIGatewayHttpApiV2ProxyRequest request,
+        ILambdaContext context
+    )
+    {
+        var movieId = request.PathParameters["id"];
+
+        // convert movieId into a GUID
+        Guid guidMovieId = Guid.Parse(movieId);
+
+        var movie = dbContext.Movies.Find(guidMovieId);
+
+        if (movie == null)
+        {
+            return new APIGatewayHttpApiV2ProxyResponse
+            {
+                StatusCode = (int)HttpStatusCode.BadRequest,
+                Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie ID")
+            };
+        }
+
+        var requestBody = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
+        var newMovieRating = requestBody.Rating;
+
+        // check if new movie rating has been provided
+        if (request.Body == null)
+        {
+            return new APIGatewayHttpApiV2ProxyResponse
+            {
+                StatusCode = (int)HttpStatusCode.BadRequest,
+                Body = System.Text.Json.JsonSerializer.Serialize("No new movie rating provided")
+            };
+        }
+
+        // if no newMovieRating in body of request, return an error
+        if (newMovieRating == null)
+        {
+            return new APIGatewayHttpApiV2ProxyResponse
+            {
+                StatusCode = (int)HttpStatusCode.BadRequest,
+                Body = System.Text.Json.JsonSerializer.Serialize("No new movie rating provided")
+            };
+        }
+
+        // if movieRating is not an int between 1 and 100, return an error
+        if (newMovieRating < 1 || newMovieRating > 100)
+        {
+            return new APIGatewayHttpApiV2ProxyResponse
+            {
+                StatusCode = (int)HttpStatusCode.BadRequest,
+                Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie rating")
+            };
+        }
+
+        // if it doesn't exist, return an error
+        if (movie == null)
+        {
+            return new APIGatewayHttpApiV2ProxyResponse
+            {
+                StatusCode = (int)HttpStatusCode.BadRequest,
+                Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie ID")
+            };
+        }
+
+        // update the movie rating
+        movie.Rating = newMovieRating;
+
+        // save changes to database
+        dbContext.SaveChanges();
+
+        return new APIGatewayHttpApiV2ProxyResponse
+        {
+            StatusCode = (int)HttpStatusCode.OK,
+            Body = System.Text.Json.JsonSerializer.Serialize(
+                $"Movie rating for {movie.Title} updated"
+            )
+        };
+    }
 }
