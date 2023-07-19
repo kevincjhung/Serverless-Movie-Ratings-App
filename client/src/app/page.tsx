@@ -13,6 +13,9 @@ import CardContent from '@mui/material/CardContent';
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
 
+import { authOptions } from "../pages/api/auth/[...nextauth]"
+
+
 import Signin from './Signin';
 
 
@@ -69,23 +72,38 @@ function MovieCard({ movie }: { movie: Movie }) {
 
 export default async function Home() {
   
-  const session = await getServerSession();
-  console.log(session)
+  const session = await getServerSession(authOptions);
+  console.log({ session })
 
-  // if(!session){
-  //   console.log('NOT SIGNED IN');
-
+  // if(!session?.accessT){
   //   redirect('/api/auth/signin')
   //   return null
   // }
+  
+  const handleLogout = async () => {
+    const data = await fetch('/api/auth/signout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${session?.accessToken}`
+      },
+    }).then((res) => res.json());
 
+    if (data.success) {
+      // Redirect to the sign-in page after successful logout
+      window.location.href = '/api/auth/signin';
+    } else {
+      console.log('Logout failed:', data);
+    }
+  };
 
   // Make a request to the API for movie data
   // const result: Movie[] = await fetch("https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies", {
   //   method: "GET",
+  //   cache: "no-store",
   //   headers: {
   //     "Content-Type": "application/json",
-  //     // "Authorization": accessToken
+  //     // Authorization: `${session?.accessToken}` 
   //   },
   // }).then((res) => res.json())
 
@@ -148,16 +166,23 @@ export default async function Home() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-          >
+            >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Movie Ratings App
           </Typography>
-          <Signin />
-          {/* <Button color="inherit">Login</Button> */}
+          <Typography component="div" sx={{ flexGrow: 1 }}>
+            {!session ? <Signin /> : <p>Welcome, {session.user?.email}</p>}
+          </Typography>
+            
+          
+
         </Toolbar>
       </AppBar>
+
+     
+     
       {result.map((movie) => (
         <MovieCard key={movie.Id} movie={movie} />
       ))}

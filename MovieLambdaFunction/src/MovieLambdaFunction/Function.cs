@@ -33,6 +33,23 @@ public class Function
         ILambdaContext context
     )
     {
+        // Authorization within the Lambda function, instead of API gateway
+        // if (
+        //     request.RequestContext.Authorizer == null
+        //     || !request.RequestContext.Authorizer.Jwt.Claims.TryGetValue("sub", out var sub)
+        // )
+        // {
+        //     return new APIGatewayHttpApiV2ProxyResponse
+        //     {
+        //         StatusCode = (int)HttpStatusCode.Unauthorized,
+        //         Body = System.Text.Json.JsonSerializer.Serialize(new { message = $"Unauthorized" }),
+        //         Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
+        //     };
+        // }
+
+        // // You can access the 'sub' claim outside of the if statement here
+        // Console.WriteLine($"The 'sub' claim value is: {sub}");
+
         var routekey = request.RouteKey;
         var method = request.RequestContext.Http.Method;
 
@@ -72,8 +89,8 @@ public class Function
     )
     {
         // ! REMOVE THIS LINE BEFORE DEPLOYING TO PRODUCTION
-        var movies = dbContext.Movies.Take(30).ToList();
-        
+        var movies = dbContext.Movies.Take(5).ToList();
+
         // var movies = dbContext.Movies.ToList();
         var method = request.RequestContext.Http.Method;
 
@@ -270,7 +287,6 @@ public class Function
             dbContext.SaveChanges();
         }
 
-
         // return a response
         return new APIGatewayHttpApiV2ProxyResponse
         {
@@ -319,7 +335,7 @@ public class Function
     {
         // the new movie rating passed in from the client
         var newMovieRating = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
-    
+
         var response = new APIGatewayHttpApiV2ProxyResponse
         {
             StatusCode = (int)HttpStatusCode.OK,
