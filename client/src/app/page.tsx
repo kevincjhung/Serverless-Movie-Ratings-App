@@ -84,48 +84,6 @@ export default async function Home() {
       Votes: 60545,
       RevenueMillions: 270.32,
       Metascore: 59
-    },
-    {
-      Id: '8a63b5df-5ebd-44b5-9373-4bd39032e6bd',
-      Title: 'Prometheus',
-      Genre: 'Adventure,Mystery,Sci-Fi',
-      Description: 'Following clues to the origin of mankind, a team finds a structure on a distant moon, but they soon realize they are not alone.',
-      Director: 'Ridley Scott',
-      Actors: 'Noomi Rapace, Logan Marshall-Green, Michael Fassbender, Charlize Theron',
-      Year: 2012,
-      RuntimeMinutes: 124,
-      Rating: 7,
-      Votes: 485820,
-      RevenueMillions: 126.46,
-      Metascore: 65
-    },
-    {
-      Id: '8ececc6b-24e6-4bc0-aa6c-cbfba77868f5',
-      Title: 'The Great Wall',
-      Genre: 'Action,Adventure,Fantasy',
-      Description: 'European mercenaries searching for black powder become embroiled in the defense of the Great Wall of China against a horde of monstrous creatures.',
-      Director: 'Yimou Zhang',
-      Actors: 'Matt Damon, Tian Jing, Willem Dafoe, Andy Lau',
-      Year: 2016,
-      RuntimeMinutes: 103,
-      Rating: 6.1,
-      Votes: 56036,
-      RevenueMillions: 45.13,
-      Metascore: 42
-    },
-    {
-      Id: 'cad85e91-41f7-4797-a3ce-41925926674b',
-      Title: 'Split',
-      Genre: 'Horror,Thriller',
-      Description: 'Three girls are kidnapped by a man with a diagnosed 23 distinct personalities. They must try to escape before the apparent emergence of a frightful new 24th.',
-      Director: 'M. Night Shyamalan',
-      Actors: 'James McAvoy, Anya Taylor-Joy, Haley Lu Richardson, Jessica Sula',
-      Year: 2016,
-      RuntimeMinutes: 117,
-      Rating: 7.3,
-      Votes: 157606,
-      RevenueMillions: 138.12,
-      Metascore: 62
     }
   ]
 
