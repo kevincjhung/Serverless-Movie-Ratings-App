@@ -71,7 +71,10 @@ public class Function
         ILambdaContext context
     )
     {
-        var movies = dbContext.Movies.ToList();
+        // ! REMOVE THIS LINE BEFORE DEPLOYING TO PRODUCTION
+        var movies = dbContext.Movies.Take(30).ToList();
+        
+        // var movies = dbContext.Movies.ToList();
         var method = request.RequestContext.Http.Method;
 
         var response = new APIGatewayHttpApiV2ProxyResponse
@@ -267,11 +270,12 @@ public class Function
             dbContext.SaveChanges();
         }
 
+
         // return a response
         return new APIGatewayHttpApiV2ProxyResponse
         {
             StatusCode = (int)HttpStatusCode.OK,
-            Body = System.Text.Json.JsonSerializer.Serialize(movie)
+            Body = System.Text.Json.JsonSerializer.Serialize("all movie deleted")
         };
     }
 

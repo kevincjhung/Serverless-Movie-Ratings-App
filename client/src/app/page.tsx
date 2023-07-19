@@ -10,28 +10,77 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 
+import { getServerSession } from 'next-auth/next';
+import { redirect } from 'next/navigation';
+
+import Signin from './Signin';
+
+
+type Movie = {
+  Id: string
+  Title: string
+  Genre: String
+  Description: string
+  Director: string
+  Actors: string
+  Year: number
+  RuntimeMinutes: number
+  Rating: number
+  Votes: number
+  RevenueMillions: number
+  Metascore: number
+}
+
+
+// Component, Card with movie info
+function MovieCard({ movie }: { movie: Movie }) {
+  return (
+    <Card variant="outlined" className="m-4">
+      <CardContent>
+        <Typography variant="h6" color="text.primary" gutterBottom>
+          {movie.Title}
+        </Typography>
+        <Typography variant="h5" color="primary" sx={{ mb: 1 }}>
+          {movie.Rating}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 1 }}>
+          {movie.Genre}
+        </Typography>
+        <Typography variant="body1" color="text.primary" sx={{ mb: 2 }}>
+          {movie.Description}
+        </Typography>
+        <Typography variant="body2" color="text.primary">
+          Directed by: {movie.Director}
+        </Typography>
+        <Typography variant="body2" color="text.primary">
+          Starring: {movie.Actors}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+          {movie.Year}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>
+  );
+}
 
 
 export default async function Home() {
+  
+  const session = await getServerSession();
+  console.log(session)
+
+  // if(!session){
+  //   console.log('NOT SIGNED IN');
+
+  //   redirect('/api/auth/signin')
+  //   return null
+  // }
 
 
-  type Movie = {
-    Id: string
-    Title: string
-    Genre: String
-    Description: string
-    Director: string
-    Actors: string
-    Year: number
-    RuntimeMinutes: number
-    Rating: number
-    Votes: number
-    RevenueMillions: number
-    Metascore: number
-  }
-
-
-
+  // Make a request to the API for movie data
   // const result: Movie[] = await fetch("https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies", {
   //   method: "GET",
   //   headers: {
@@ -41,7 +90,7 @@ export default async function Home() {
   // }).then((res) => res.json())
 
 
-  // hardcoded so you don't have to keep hitting the api
+  // ! hardcoded so you don't have to keep hitting the API, REMOVE LATER
   const result = [
     {
       Id: '06a3957c-fa67-4dbe-a972-29e90ae1f54f',
@@ -105,43 +154,13 @@ export default async function Home() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Movie Ratings App
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Signin />
+          {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>
-
-
-      {result.map((movie) => {
-        return (
-          <Card variant="outlined" className="m-4">
-            <CardContent>
-              <Typography variant="h6" color="text.primary" gutterBottom>
-                {movie.Title}
-              </Typography>
-              <Typography variant="h5" color="primary" sx={{ mb: 1 }}>
-                {movie.Rating}
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 1 }}>
-                {movie.Genre}
-              </Typography>
-              <Typography variant="body1" color="text.primary" sx={{ mb: 2 }}>
-                {movie.Description}
-              </Typography>
-              <Typography variant="body2" color="text.primary">
-                Directed by: {movie.Director}
-              </Typography>
-              <Typography variant="body2" color="text.primary">
-                Starring: {movie.Actors}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-                {movie.Year}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">Learn More</Button>
-            </CardActions>
-          </Card>
-        );
-      })}
+      {result.map((movie) => (
+        <MovieCard key={movie.Id} movie={movie} />
+      ))}
     </main>
   )
 }
