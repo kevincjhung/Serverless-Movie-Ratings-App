@@ -1,113 +1,189 @@
-import Image from 'next/image'
+// Materials UI Imports
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 
-export default function Home() {
+
+
+export default async function Home() {
+
+
+  type Movie = {
+    Id: string
+    Title: string
+    Genre: String
+    Description: string
+    Director: string
+    Actors: string
+    Year: number
+    RuntimeMinutes: number
+    Rating: number
+    Votes: number
+    RevenueMillions: number
+    Metascore: number
+  }
+
+
+
+  // const result: Movie[] = await fetch("https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies", {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     // "Authorization": accessToken
+  //   },
+  // }).then((res) => res.json())
+
+
+  // hardcoded so you don't have to keep hitting the api
+  const result = [
+    {
+      Id: '06a3957c-fa67-4dbe-a972-29e90ae1f54f',
+      Title: 'Guardians of the Galaxy',
+      Genre: 'Action,Adventure,Sci-Fi',
+      Description: 'A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe.',
+      Director: 'James Gunn',
+      Actors: 'Chris Pratt, Vin Diesel, Bradley Cooper, Zoe Saldaña',
+      Year: 2014,
+      RuntimeMinutes: 121,
+      Rating: 8.1,
+      Votes: 757074,
+      RevenueMillions: 333.13,
+      Metascore: 76
+    },
+    {
+      Id: '4bce9679-05a5-48da-89ff-7390cd94c09b',
+      Title: 'Suicide Squad',
+      Genre: 'Action,Adventure,Fantasy',
+      Description: 'A secret government agency recruits some of the most dangerous incarcerated super-villains to form a defensive task force. Their first mission: save the world from the apocalypse.',
+      Director: 'David Ayer',
+      Actors: 'Will Smith, Jared Leto, Margot Robbie, Viola Davis',
+      Year: 2016,
+      RuntimeMinutes: 123,
+      Rating: 6.2,
+      Votes: 393727,
+      RevenueMillions: 325.02,
+      Metascore: 40
+    },
+    {
+      Id: '8954f247-a729-4d7d-8a10-69d7e5d8bcaf',
+      Title: 'Sing',
+      Genre: 'Animation,Comedy,Family',
+      Description: 'In a city of humanoid animals, a hustling theater impresarios attempt to save his theater with a singing competition becomes grander than he anticipates even as its finalists find that their lives will never be the same.',
+      Director: 'Christophe Lourdelet',
+      Actors: 'Matthew McConaughey,Reese Witherspoon, Seth MacFarlane, Scarlett Johansson',
+      Year: 2016,
+      RuntimeMinutes: 108,
+      Rating: 7.2,
+      Votes: 60545,
+      RevenueMillions: 270.32,
+      Metascore: 59
+    },
+    {
+      Id: '8a63b5df-5ebd-44b5-9373-4bd39032e6bd',
+      Title: 'Prometheus',
+      Genre: 'Adventure,Mystery,Sci-Fi',
+      Description: 'Following clues to the origin of mankind, a team finds a structure on a distant moon, but they soon realize they are not alone.',
+      Director: 'Ridley Scott',
+      Actors: 'Noomi Rapace, Logan Marshall-Green, Michael Fassbender, Charlize Theron',
+      Year: 2012,
+      RuntimeMinutes: 124,
+      Rating: 7,
+      Votes: 485820,
+      RevenueMillions: 126.46,
+      Metascore: 65
+    },
+    {
+      Id: '8ececc6b-24e6-4bc0-aa6c-cbfba77868f5',
+      Title: 'The Great Wall',
+      Genre: 'Action,Adventure,Fantasy',
+      Description: 'European mercenaries searching for black powder become embroiled in the defense of the Great Wall of China against a horde of monstrous creatures.',
+      Director: 'Yimou Zhang',
+      Actors: 'Matt Damon, Tian Jing, Willem Dafoe, Andy Lau',
+      Year: 2016,
+      RuntimeMinutes: 103,
+      Rating: 6.1,
+      Votes: 56036,
+      RevenueMillions: 45.13,
+      Metascore: 42
+    },
+    {
+      Id: 'cad85e91-41f7-4797-a3ce-41925926674b',
+      Title: 'Split',
+      Genre: 'Horror,Thriller',
+      Description: 'Three girls are kidnapped by a man with a diagnosed 23 distinct personalities. They must try to escape before the apparent emergence of a frightful new 24th.',
+      Director: 'M. Night Shyamalan',
+      Actors: 'James McAvoy, Anya Taylor-Joy, Haley Lu Richardson, Jessica Sula',
+      Year: 2016,
+      RuntimeMinutes: 117,
+      Rating: 7.3,
+      Votes: 157606,
+      RevenueMillions: 138.12,
+      Metascore: 62
+    }
+  ]
+
+
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Movie Ratings App
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      {result.map((movie) => {
+        return (
+          <Card variant="outlined" className="m-4">
+            <CardContent>
+              <Typography variant="h6" color="text.primary" gutterBottom>
+                {movie.Title}
+              </Typography>
+              <Typography variant="h5" color="primary" sx={{ mb: 1 }}>
+                {movie.Rating}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 1 }}>
+                {movie.Genre}
+              </Typography>
+              <Typography variant="body1" color="text.primary" sx={{ mb: 2 }}>
+                {movie.Description}
+              </Typography>
+              <Typography variant="body2" color="text.primary">
+                Directed by: {movie.Director}
+              </Typography>
+              <Typography variant="body2" color="text.primary">
+                Starring: {movie.Actors}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+                {movie.Year}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Learn More</Button>
+            </CardActions>
+          </Card>
+        );
+      })}
     </main>
   )
 }
