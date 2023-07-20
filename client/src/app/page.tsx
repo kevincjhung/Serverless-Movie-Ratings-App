@@ -52,7 +52,7 @@ export default async function Home() {
 
     if (data.success) {
       // Redirect to the sign-in page after successful logout
-      window.location.href = '/api/auth/signin';
+      window.location.href = '/';
     } else {
       console.log('Logout failed:', data);
     }
@@ -64,7 +64,7 @@ export default async function Home() {
   //   cache: "no-store",
   //   headers: {
   //     "Content-Type": "application/json",
-  //     // Authorization: `${session?.accessToken}` 
+  //      Authorization: `${session?.accessToken}` 
   //   },
   // }).then((res) => res.json())
 

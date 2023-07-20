@@ -1,12 +1,15 @@
-
+// Material UI
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
+// Components
 import Signin from './SignIn';
+import SignOut from './SignOut';
 
+// Next Auth
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from "../../pages/api/auth/[...nextauth]"
 
@@ -28,9 +31,10 @@ export default async function NavBar() {
 					<Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
 						Movie Ratings App
 					</Typography>
-					<Typography component="div" sx={{ flexGrow: 1 }}>
+					<Typography component="div" >
 						{!session ? <Signin /> : <p>Welcome, {session.user?.email}</p>}
 					</Typography>
+					<SignOut />
 				</Toolbar>
 			</AppBar>
 		</>
