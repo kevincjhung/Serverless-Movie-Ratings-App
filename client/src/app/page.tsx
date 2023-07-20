@@ -179,7 +179,7 @@ export default async function Home() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Learn More</Button>
+              <Button size="small">...More</Button>
             </CardActions>
           </Card>
         );
