@@ -15,6 +15,7 @@ import { authOptions } from "../../pages/api/auth/[...nextauth]"
 
 export default async function NavBar() {
 	const session = await getServerSession(authOptions);
+	
 	return (
 		<>
 			<AppBar position="static">

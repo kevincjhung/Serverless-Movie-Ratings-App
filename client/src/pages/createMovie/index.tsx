@@ -1,9 +1,11 @@
 
+import MovieInputForm from '@/app/components/MovieInputForm';
+import NavBar from '@/app/components/NavBar';
 
 export default function CreateMovie() {
-    return (
-        <>
-            <h1>Page for Creating Movies</h1>
-        </>
-    )
+	return (
+		<>
+			<MovieInputForm />
+		</>
+	)
 }
