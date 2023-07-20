@@ -31,10 +31,10 @@ export default async function NavBar() {
 					<Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
 						Movie Ratings App
 					</Typography>
-					<Typography component="div" >
+					<Typography component="div" className="mr-4" >
 						{!session ? <Signin /> : <p>Welcome, {session.user?.email}</p>}
 					</Typography>
-					<SignOut />
+					{session ? <SignOut /> : null}
 				</Toolbar>
 			</AppBar>
 		</>
