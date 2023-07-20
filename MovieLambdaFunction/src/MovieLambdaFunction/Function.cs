@@ -89,7 +89,7 @@ public class Function
     )
     {
         // ! REMOVE THIS LINE BEFORE DEPLOYING TO PRODUCTION
-        var movies = dbContext.Movies.Take(5).ToList();
+        var movies = dbContext.Movies.Take(3).ToList();
 
         // var movies = dbContext.Movies.ToList();
         var method = request.RequestContext.Http.Method;
