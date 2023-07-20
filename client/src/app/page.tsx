@@ -32,7 +32,7 @@ type Movie = {
 
 
 export default async function Home() {
-  
+
   const session = await getServerSession(authOptions);
   console.log({ session })
 
@@ -40,7 +40,7 @@ export default async function Home() {
   //   redirect('/api/auth/signin')
   //   return null
   // }
-  
+
   const handleLogout = async () => {
     const data = await fetch('/api/auth/signout', {
       method: 'POST',
