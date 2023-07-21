@@ -1,4 +1,4 @@
-
+// !! TODO: Change this to jsx and see if it works
 
 "use client"
 // Material UI
@@ -125,7 +125,7 @@ export default function MovieInputForm() {
 
 		try {
 			const response = await fetch(endpoint, {
-				method: 'GET',
+				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
