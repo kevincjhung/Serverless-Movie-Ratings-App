@@ -2,6 +2,8 @@ const fs = require('fs');
 const Papa = require('papaparse');
 const axios = require('axios');
 
+
+
 // Function to read the CSV file and parse it into JSON objects
 async function parseCSVToJSON(filePath) {
   const fileContent = fs.readFileSync(filePath, 'utf8');
@@ -12,10 +14,11 @@ async function parseCSVToJSON(filePath) {
 
   const jsonData = parsedData.data;
 
-  // Assuming the API endpoint is 'https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies'
   const apiEndpoint = 'https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies';
 
-  for (let i = 496; i < jsonData.length; i++) {
+  let listOfGenres = [];
+
+  for (let i = 0; i < jsonData.length; i++) {
     const row = jsonData[i];
     const emptyFields = Object.keys(row).filter((key) => !row[key].trim());
     if (emptyFields.length > 0) {
@@ -39,17 +42,24 @@ async function parseCSVToJSON(filePath) {
       });
       console.log(`Row ${i + 1} successfully sent to the server.`);
       console.log('Server response:', response.data);
+
+      // check if genre is already in the listOfGenres
+      if (listOfGenres.indexOf(row.Genre) === -1) {
+        listOfGenres.push(row.Genre);
+      }
     } catch (error) {
       console.error(`Error sending row ${i + 1} to the server:`, error.message);
     }
 
-    // Introduce a 1-second delay before sending the next request
+    // Introduce a 100ms, to prevent throttling
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
 
   return jsonData;
 }
 
-// Sample usage
+
+
 const filePath = 'movie.csv';
 parseCSVToJSON(filePath);
+

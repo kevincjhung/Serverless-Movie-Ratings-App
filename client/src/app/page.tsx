@@ -91,7 +91,6 @@ export default async function Home() {
 
   return (
     <main>
-      <NavBar />
       {result.map((movie) => (
         <MovieCard key={movie.Id} movie={movie} />
       ))}

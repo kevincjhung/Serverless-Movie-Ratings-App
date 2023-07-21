@@ -142,6 +142,7 @@ public class Function
     )
     {
         var movieData = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
+        Console.WriteLine("movieData");
 
         // TODO: refactor validation logic
 
