@@ -26,6 +26,7 @@ export default function MovieInputForm() {
     metaScore: '',
   });
 
+  // TODO: This would later be replaced with a call to an API to get the list of genres
   const movieGenres = [
     {
       value: 'Adventure',
@@ -122,10 +123,7 @@ export default function MovieInputForm() {
       [id]: inputValue,
     });
 
-    console.log(formData)
-
-
-    
+    console.log(formData)    
   };
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -134,42 +132,24 @@ export default function MovieInputForm() {
 
     try {
       const url = 'https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies';
-      console.log('sending form data ')
-      console.log(formData)
+   
+      let res = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        cache: "no-store",
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }).then((res) => res.json())
 
-      // let requestBody = {
-      //   Title: 'Harry Potter and The Chamber Is Loaded',
-      //   Genre: 'Action,Adventure,Sci-Fi',
-      //   Description: 'A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe.',
-      //   Director: 'James Gunn',
-      //   Actors: 'Chris Pratt, Vin Diesel, Bradley Cooper, Zoe Saldaña',
-      //   Year: 2011,
-      //   RuntimeMinutes: 121,
-      //   Rating: 8.1,
-      //   Votes: 757074,
-      //   RevenueMillions: 333.13,
-      //   Metascore: 76
-      // }
-
-      // let res = await fetch(url, {
-      //   method: 'POST',
-      //   body: JSON.stringify(requestBody),
-      //   cache: "no-store",
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   }
-      // }).then((res) => res.json())
-
-      // console.log(res);
+      console.log(res);
 
 
-      // if (res.ok) {
-      //   // Handle successful form submission, e.g., show a success message
-      //   console.log('Form submitted successfully!');
-      // } else {
-      //   // Handle errors, e.g., show an error message
-      //   console.error(res);
-      // }
+      if (res.ok) {
+        console.log('Form submitted successfully!');
+      } else {
+        console.error(res);
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -187,7 +167,7 @@ export default function MovieInputForm() {
           <Typography variant="h4" className="text-center">
             Add A Movie
           </Typography>
-          
+
         <TextField
             required
             id="title"
