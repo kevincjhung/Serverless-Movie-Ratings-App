@@ -8,6 +8,7 @@ export default function () {
     <div>
       <Button 
         variant="outlined" 
+        className="text-slate-50"
         onClick={() => signIn()}
       >
         Sign In

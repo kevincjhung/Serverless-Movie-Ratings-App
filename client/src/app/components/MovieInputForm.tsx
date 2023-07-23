@@ -1,248 +1,306 @@
-// !! TODO: Change this to jsx and see if it works
-
 "use client"
+
 // Material UI
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 
+//
 import { useState } from 'react';
+import { Typography } from '@mui/material';
 
 
 export default function MovieInputForm() {
-	const [formData, setFormData] = useState({
-		movieTitle: '',
-		genre: '',
-		description: '',
-		director: '',
-		actors: '',
-		year: '',
-		runtimeMinutes: '',
-		rating: '',
-		votes: '',
-		revenueMillions: '',
-		metascore: '',
-	});
+  const [formData, setFormData] = useState({
+    title: '',
+    genre: '',
+    description: '',
+    director: '',
+    actors: '',
+    year: '',
+    runtimeMinutes: '',
+    rating: '',
+    votes: '',
+    revenueMillions: '',
+    metaScore: '',
+  });
 
-	const movieGenres = [
-		{
-			value: 'Adventure',
-			label: 'Adventure',
-		},
-		{
-			value: 'Crime',
-			label: 'Crime',
-		},
-		{
-			value: 'Mystery',
-			label: 'Mystery',
-		},
-		{
-			value: 'Comedy',
-			label: 'Comedy',
-		},
-		{
-			value: 'Drama',
-			label: 'Drama',
-		},
-		{
-			value: 'Horror',
-			label: 'Horror',
-		},
-		{
-			value: 'Thriller',
-			label: 'Thriller',
-		},
-		{
-			value: 'Music',
-			label: 'Music',
-		},
-		{
-			value: 'Western',
-			label: 'Western',
-		},
-		{
-			value: 'Family',
-			label: 'Family',
-		},
-		{
-			value: 'Musical',
-			label: 'Musical',
-		},
-		{
-			value: 'Biography',
-			label: 'Biography',
-		},
-		{
-			value: 'Romance',
-			label: 'Romance',
-		},
-		{
-			value: 'Action',
-			label: 'Action',
-		},
-		{
-			value: 'Sci-Fi',
-			label: 'Sci-Fi',
-		},
-		{
-			value: 'War',
-			label: 'War',
-		},
-		{
-			value: 'Fantasy',
-			label: 'Fantasy',
-		},
-		{
-			value: 'History',
-			label: 'History',
-		},
-		{
-			value: 'Animation',
-			label: 'Animation',
-		},
-		{
-			value: 'Sport',
-			label: 'Sport',
-		},
-	];
+  const movieGenres = [
+    {
+      value: 'Adventure',
+      label: 'Adventure',
+    },
+    {
+      value: 'Crime',
+      label: 'Crime',
+    },
+    {
+      value: 'Mystery',
+      label: 'Mystery',
+    },
+    {
+      value: 'Comedy',
+      label: 'Comedy',
+    },
+    {
+      value: 'Drama',
+      label: 'Drama',
+    },
+    {
+      value: 'Horror',
+      label: 'Horror',
+    },
+    {
+      value: 'Thriller',
+      label: 'Thriller',
+    },
+    {
+      value: 'Music',
+      label: 'Music',
+    },
+    {
+      value: 'Western',
+      label: 'Western',
+    },
+    {
+      value: 'Family',
+      label: 'Family',
+    },
+    {
+      value: 'Musical',
+      label: 'Musical',
+    },
+    {
+      value: 'Biography',
+      label: 'Biography',
+    },
+    {
+      value: 'Romance',
+      label: 'Romance',
+    },
+    {
+      value: 'Action',
+      label: 'Action',
+    },
+    {
+      value: 'Sci-Fi',
+      label: 'Sci-Fi',
+    },
+    {
+      value: 'War',
+      label: 'War',
+    },
+    {
+      value: 'Fantasy',
+      label: 'Fantasy',
+    },
+    {
+      value: 'History',
+      label: 'History',
+    },
+    {
+      value: 'Animation',
+      label: 'Animation',
+    },
+    {
+      value: 'Sport',
+      label: 'Sport',
+    },
+  ];
 
-	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { id, value } = event.target;
-		setFormData((prevData) => ({
-			...prevData,
-			[id]: value,
-		}));
-	};
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    
+    // figure out the id of the input field that was changed
+    const id = event.target.id;
+    
+    const inputValue = event.target.value;
+    
+    // update the state
+    setFormData({
+      ...formData,
+      [id]: inputValue,
+    });
 
-	const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		console.log("handleFormSubmi()")
-
-		// You can add your own API endpoint for the POST request
-		const endpoint = 'https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies'; // Replace this with your actual endpoint
-
-		try {
-			const response = await fetch(endpoint, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(formData),
-			});
-
-			if (response.ok) {
-				// Handle successful form submission, e.g., show a success message
-				console.log('Form submitted successfully!');
-			} else {
-				// Handle errors, e.g., show an error message
-				console.error(response);
-			}
-		} catch (error) {
-			console.error('Error submitting form:', error);
-		}
-	};
+    console.log(formData)
 
 
+    
+  };
 
-	return (
-		<>
-			<Box
-				component="form"
-				sx={{
-					'& .MuiTextField-root': { m: 1, width: '30ch' },
-				}}
-				noValidate
-				autoComplete="off"
-				className='mt-4 max-w-screen-md'
-			>
-				<TextField
-					required
-					id="title"
-					label="Title"
-					defaultValue=""
-				/>
-				<TextField
-					id="year"
-					label="Year"
-					type="number"
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					id="runtimeMinutes"
-					label="Runtime Minutes"
-					type="number"
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					id="rating"
-					label="Rating"
-					type="number"
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					id="votes"
-					label="Votes"
-					type="number"
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					id="metaScore"
-					label="Meta Score"
-					type="number"
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					id="revenueMillions"
-					label="Revenue (Millions)"
-					type="number"
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					id="genre"
-					select
-					label="Genre"
-					defaultValue="Genre1"
-				>
-					{movieGenres.map((option) => (
-						<MenuItem key={option.value} value={option.value}>
-							{option.label}
-						</MenuItem>
-					))}
-				</TextField>
-				<TextField
-					id="director"
-					label="Director"
-				/>
-				<TextField
-					id="actors"
-					label="Actors"
-					helperText="Separate actor names with commas"
-				/>
-				<TextField
-					id="outlined-multiline-static"
-					label="Description"
-					multiline
-					rows={4}
-					helperText="Write a short description of the movie"
-				/>
-				<button type="submit" >
-					Submit
-				</button>
-			</Box>
-		</>
-	)
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("handleFormSubmi()")    
+
+    try {
+      const url = 'https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies';
+      console.log('sending form data ')
+      console.log(formData)
+
+      // let requestBody = {
+      //   Title: 'Harry Potter and The Chamber Is Loaded',
+      //   Genre: 'Action,Adventure,Sci-Fi',
+      //   Description: 'A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe.',
+      //   Director: 'James Gunn',
+      //   Actors: 'Chris Pratt, Vin Diesel, Bradley Cooper, Zoe Saldaña',
+      //   Year: 2011,
+      //   RuntimeMinutes: 121,
+      //   Rating: 8.1,
+      //   Votes: 757074,
+      //   RevenueMillions: 333.13,
+      //   Metascore: 76
+      // }
+
+      // let res = await fetch(url, {
+      //   method: 'POST',
+      //   body: JSON.stringify(requestBody),
+      //   cache: "no-store",
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   }
+      // }).then((res) => res.json())
+
+      // console.log(res);
+
+
+      // if (res.ok) {
+      //   // Handle successful form submission, e.g., show a success message
+      //   console.log('Form submitted successfully!');
+      // } else {
+      //   // Handle errors, e.g., show an error message
+      //   console.error(res);
+      // }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
+
+
+  return (
+    <>
+      <form 
+        onSubmit={handleFormSubmit}
+        className="max-w-lg mx-auto mt-8 px-4 py-8 bg-white shadow-lg rounded-lg"
+      >
+        <div className="">
+          <Typography variant="h4" className="text-center">
+            Add A Movie
+          </Typography>
+          
+        <TextField
+            required
+            id="title"
+            label="Title"
+            
+            onChange={handleInputChange}
+            className="mt-4 ml-4" 
+          />
+          <TextField
+            id="year"
+            label="Year"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className="mt-4 ml-4" 
+            onChange={handleInputChange}
+          />
+          <TextField
+            id="runtimeMinutes"
+            label="Runtime Minutes"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className="mt-4 ml-4" 
+            onChange={handleInputChange}
+          />
+          <TextField
+            id="rating"
+            label="Rating"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className="mt-4 ml-4" 
+            onChange={handleInputChange}
+          />
+          <TextField
+            id="votes"
+            label="Votes"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className="mt-4 ml-4" 
+            onChange={handleInputChange}
+          />
+          <TextField
+            id="metaScore"
+            label="Meta Score"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className="mt-4 ml-4" 
+            onChange={handleInputChange}
+          />
+          <TextField
+            id="revenueMillions"
+            label="Revenue (Millions)"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className="mt-4 ml-4" 
+            onChange={handleInputChange}
+          />
+          <TextField
+            id="genre"
+            label="Genre"
+            select
+            defaultValue="Adventure"
+            className="mt-4 ml-4" 
+            onChange={handleInputChange}
+          >
+            {movieGenres.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+          <TextField
+            id="director"
+            label="Director"
+            className="mt-4 ml-4" 
+            onChange={handleInputChange}
+          />
+          <TextField
+            id="actors"
+            label="Actors"
+            helperText="Separate actor names with commas"
+            className="mt-4 ml-4" 
+            onChange={handleInputChange}
+          />
+        </div>
+        <TextField
+          id="description"
+          label="Description"
+          multiline
+          rows={4}
+          helperText="Write a short description of the movie"
+          fullWidth
+          className="mt-4"
+          onChange={handleInputChange}
+        />
+        {/* Use div for button container and apply flex layout */}
+        <div className="mt-8 flex justify-center">
+          <Button type="submit" variant="contained" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
+            Create
+          </Button>
+        </div>
+      </form>
+    </>
+  )
 }

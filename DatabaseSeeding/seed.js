@@ -1,3 +1,4 @@
+// Imports
 const fs = require('fs');
 const Papa = require('papaparse');
 const axios = require('axios');
@@ -52,7 +53,7 @@ async function parseCSVToJSON(filePath) {
     }
 
     // Introduce a 100ms, to prevent throttling
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 90));
   }
 
   return jsonData;

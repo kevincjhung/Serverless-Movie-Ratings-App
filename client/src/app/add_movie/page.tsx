@@ -2,12 +2,12 @@ import MovieInputForm from "../components/MovieInputForm"
 
 // edit metadata 
 export const metadata = {
-	title: 'Add Movie',
-
+	title: 'Add A Movie',
 }
-export default function Page() {
 
+export default async function Page() {
 
+	
 	return (
 		<div>
 			<MovieInputForm />

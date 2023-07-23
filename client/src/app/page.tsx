@@ -40,23 +40,23 @@ export default async function Home() {
   //   redirect('/api/auth/signin')
   //   return null
   // }
+  
+  // const handleLogout = async () => {
+  //   const data = await fetch('/api/auth/signout', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `${session?.accessToken}`
+  //     },
+  //   }).then((res) => res.json());
 
-  const handleLogout = async () => {
-    const data = await fetch('/api/auth/signout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${session?.accessToken}`
-      },
-    }).then((res) => res.json());
-
-    if (data.success) {
-      // Redirect to the sign-in page after successful logout
-      window.location.href = '/';
-    } else {
-      console.log('Logout failed:', data);
-    }
-  };
+  //   if (data.success) {
+  //     // Redirect to the sign-in page after successful logout
+  //     window.location.href = '/';
+  //   } else {
+  //     console.log('Logout failed:', data);
+  //   }
+  // };
 
   // Make a request to the API for movie data
   // const result: Movie[] = await fetch("https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies", {
@@ -78,8 +78,36 @@ export default async function Home() {
       Description: 'A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe.',
       Director: 'James Gunn',
       Actors: 'Chris Pratt, Vin Diesel, Bradley Cooper, Zoe Saldaña',
-      Year: 2014,
+      Year: 2011,
       RuntimeMinutes: 121,
+      Rating: 8.1,
+      Votes: 757074,
+      RevenueMillions: 333.13,
+      Metascore: 76
+    },
+    {
+      Id: '06a3957c-fa67-4dbe-a972-29e90ae1f54f',
+      Title: 'Guardians of the Galaxy 2',
+      Genre: 'Action,Adventure,Sci-Fi',
+      Description: 'A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe.',
+      Director: 'James Gunn',
+      Actors: 'Chris Pratt, Vin Diesel, Bradley Cooper, Zoe Saldaña',
+      Year: 2014,
+      RuntimeMinutes: 101,
+      Rating: 8.1,
+      Votes: 757074,
+      RevenueMillions: 333.13,
+      Metascore: 76
+    },
+    {
+      Id: '06a3957c-fa67-4dbe-a972-29e90ae1f54f',
+      Title: 'Guardians of the Galaxy 3',
+      Genre: 'Action,Adventure,Sci-Fi',
+      Description: 'A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe.',
+      Director: 'James Gunn',
+      Actors: 'Chris Pratt, Vin Diesel, Bradley Cooper, Zoe Saldaña',
+      Year: 2018,
+      RuntimeMinutes: 124,
       Rating: 8.1,
       Votes: 757074,
       RevenueMillions: 333.13,
