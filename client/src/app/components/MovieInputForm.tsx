@@ -29,83 +29,83 @@ export default function MovieInputForm() {
   // TODO: This would later be replaced with a call to an API to get the list of genres
   const movieGenres = [
     {
-      value: 'Adventure',
+      value: 'adventure',
       label: 'Adventure',
     },
     {
-      value: 'Crime',
+      value: 'crime',
       label: 'Crime',
     },
     {
-      value: 'Mystery',
+      value: 'mystery',
       label: 'Mystery',
     },
     {
-      value: 'Comedy',
+      value: 'comedy',
       label: 'Comedy',
     },
     {
-      value: 'Drama',
+      value: 'drama',
       label: 'Drama',
     },
     {
-      value: 'Horror',
+      value: 'horror',
       label: 'Horror',
     },
     {
-      value: 'Thriller',
+      value: 'thriller',
       label: 'Thriller',
     },
     {
-      value: 'Music',
+      value: 'music',
       label: 'Music',
     },
     {
-      value: 'Western',
+      value: 'western',
       label: 'Western',
     },
     {
-      value: 'Family',
+      value: 'family',
       label: 'Family',
     },
     {
-      value: 'Musical',
+      value: 'musical',
       label: 'Musical',
     },
     {
-      value: 'Biography',
+      value: 'biography',
       label: 'Biography',
     },
     {
-      value: 'Romance',
+      value: 'romance',
       label: 'Romance',
     },
     {
-      value: 'Action',
+      value: 'action',
       label: 'Action',
     },
     {
-      value: 'Sci-Fi',
+      value: 'sci-Fi',
       label: 'Sci-Fi',
     },
     {
-      value: 'War',
+      value: 'war',
       label: 'War',
     },
     {
-      value: 'Fantasy',
+      value: 'fantasy',
       label: 'Fantasy',
     },
     {
-      value: 'History',
+      value: 'history',
       label: 'History',
     },
     {
-      value: 'Animation',
+      value: 'animation',
       label: 'Animation',
     },
     {
-      value: 'Sport',
+      value: 'sport',
       label: 'Sport',
     },
   ];
@@ -116,7 +116,17 @@ export default function MovieInputForm() {
     const id = event.target.id;
     
     const inputValue = event.target.value;
-    
+
+    // convert the values to the correct types for runtimeMinutes,rating,votes,revenueMillions,metaScore
+    if (id === 'runtimeMinutes' || id === 'rating' || id === 'votes' || id === 'revenueMillions' || id === 'metaScore') {
+      setFormData({
+        ...formData,
+        [id]: Number(inputValue),
+      });
+      return;
+    }
+    console.log(typeof(formData.title))
+
     // update the state
     setFormData({
       ...formData,
@@ -128,7 +138,6 @@ export default function MovieInputForm() {
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("handleFormSubmi()")    
 
     try {
       const url = 'https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies';
@@ -141,8 +150,6 @@ export default function MovieInputForm() {
           'Content-Type': 'application/json',
         }
       }).then((res) => res.json())
-
-      console.log(res);
 
 
       if (res.ok) {
