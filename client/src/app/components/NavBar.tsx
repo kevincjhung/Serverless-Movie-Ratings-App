@@ -5,9 +5,11 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
+
 // Components
 import Signin from './SignIn';
 import SignOut from './SignOut';
+import NavBarMenu from './NavBarMenu';
 
 // Next Auth
 import { getServerSession } from 'next-auth/next';
@@ -19,16 +21,13 @@ export default async function NavBar() {
 	return (
 		<>
 			<AppBar position="static">
-				<Toolbar>
-					<IconButton
-						size="large"
-						edge="start"
-						color="inherit"
-						aria-label="menu"
-						sx={{ mr: 2 }}
-					>
-						<MenuIcon />
-					</IconButton>
+        <Toolbar>
+				<NavBarMenu items={[  
+          { label: 'Home', link: '/' },
+          { label: 'Add A Movie', link: '/add_movie' },
+          { label: 'About', link: '/' },
+          { label: 'Contact', link: '/' },
+        ]} />
 					<Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
 						Movie Ratings App
 					</Typography>
