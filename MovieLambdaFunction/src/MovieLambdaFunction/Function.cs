@@ -88,8 +88,8 @@ public class Function
         ILambdaContext context
     )
     {
-        // ! REMOVE THIS LINE BEFORE DEPLOYING TO PRODUCTION
-        var movies = dbContext.Movies.Take(3).ToList();
+        
+        var movies = dbContext.Movies.ToList();
 
         // var movies = dbContext.Movies.ToList();
         var method = request.RequestContext.Http.Method;
@@ -142,6 +142,7 @@ public class Function
     )
     {
         var movieData = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
+        Console.WriteLine("movieData");
 
         // TODO: refactor validation logic
 
