@@ -21,14 +21,15 @@ export default async function NavBar() {
 	return (
 		<>
 			<AppBar position="static">
-        <Toolbar>
-				<NavBarMenu items={[  
+        <Toolbar className="bg-gradient-to-r from-gray-500 to-gray-800 shadow-md">
+				<NavBarMenu 
+          items={[  
           { label: 'Home', link: '/' },
           { label: 'Add A Movie', link: '/add_movie' },
           { label: 'About', link: '/' },
           { label: 'Contact', link: '/' },
         ]} />
-					<Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+					<Typography variant="h5" component="div" sx={{ flexGrow: 1 }}  >
 						Movie Ratings App
 					</Typography>
 					<Typography component="div" className="mr-4" >
