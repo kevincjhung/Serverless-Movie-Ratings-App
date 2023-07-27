@@ -88,8 +88,7 @@ public class Function
         ILambdaContext context
     )
     {
-        // ! REMOVE THIS LINE BEFORE DEPLOYING TO PRODUCTION
-        var movies = dbContext.Movies.Take(3).ToList();
+        var movies = dbContext.Movies.ToList();
 
         // var movies = dbContext.Movies.ToList();
         var method = request.RequestContext.Http.Method;
@@ -142,8 +141,7 @@ public class Function
     )
     {
         var movieData = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
-
-        // TODO: refactor validation logic
+        
 
         // if no movieData in body of request, return an error
         if (movieData == null)
@@ -155,28 +153,24 @@ public class Function
             };
         }
 
-        // if no movie title was given, return an error
-        if (movieData.Title == null)
+        Console.WriteLine(request);
+
+      
+        try
         {
+            // add the movie to the database
+            dbContext.Movies.Add(movieData);
+            dbContext.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
             return new APIGatewayHttpApiV2ProxyResponse
             {
                 StatusCode = (int)HttpStatusCode.BadRequest,
-                Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie title")
+                Body = System.Text.Json.JsonSerializer.Serialize(e)
             };
         }
-
-        // if no description was given, return an error
-        if (movieData.Description == null)
-        {
-            return new APIGatewayHttpApiV2ProxyResponse
-            {
-                StatusCode = (int)HttpStatusCode.BadRequest,
-                Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie description")
-            };
-        }
-
-        dbContext.Movies.Add(movieData);
-        dbContext.SaveChanges();
 
         return new APIGatewayHttpApiV2ProxyResponse
         {
@@ -272,20 +266,24 @@ public class Function
         ILambdaContext context
     )
     {
-        var movieId = request.PathParameters["id"];
+        // Delete all movies
+        dbContext.Movies.RemoveRange(dbContext.Movies);
+        dbContext.SaveChanges();
 
-        // convert movieId into a GUID
-        Guid guidMovieId = Guid.Parse(movieId);
+        // var movieId = request.PathParameters["id"];
 
-        // check if a movie with that given Id exists
-        var movie = dbContext.Movies.Find(guidMovieId);
+        // // convert movieId into a GUID
+        // Guid guidMovieId = Guid.Parse(movieId);
 
-        // if it exists, delete it
-        if (movie != null)
-        {
-            dbContext.Movies.Remove(movie);
-            dbContext.SaveChanges();
-        }
+        // // check if a movie with that given Id exists
+        // var movie = dbContext.Movies.Find(guidMovieId);
+
+        // // if it exists, delete it
+        // if (movie != null)
+        // {
+        //     dbContext.Movies.Remove(movie);
+        //     dbContext.SaveChanges();
+        // }
 
         // return a response
         return new APIGatewayHttpApiV2ProxyResponse
@@ -363,7 +361,7 @@ public class Function
             return new APIGatewayHttpApiV2ProxyResponse
             {
                 StatusCode = (int)HttpStatusCode.BadRequest,
-                Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie ID")
+                Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie ID!")
             };
         }
 
