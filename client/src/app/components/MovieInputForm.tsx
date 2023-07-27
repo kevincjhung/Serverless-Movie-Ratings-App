@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 
 
 
 export default function MovieInputForm() {
+  const [formSubmissionStatus, setFormSubmissionStatus] = useState<boolean>(false);
   const [ratingError, setRatingError] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     Title: '',
@@ -164,8 +166,6 @@ export default function MovieInputForm() {
         "Metascore": 35
       }
 
-
-
       const requestData = {
         ...formData,
         Year: Number(formData.Year),
@@ -177,11 +177,6 @@ export default function MovieInputForm() {
         Genre: 'adventure',
       };
 
-
-
-      console.log('form data: \n')
-      console.log(requestData)
-
       let res = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(requestData),
@@ -191,13 +186,11 @@ export default function MovieInputForm() {
         }
       }).then((res) => res.json())
 
-      if (res.ok) {
-        console.log('Form submitted successfully!');
-      } else {
-        console.error(res);
-      }
+     
+      setFormSubmissionStatus(true);
+
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error adding a movie:', error);
     }
   };
 
@@ -208,11 +201,10 @@ export default function MovieInputForm() {
         onSubmit={handleFormSubmit}
         className="max-w-lg mx-auto mt-8 px-4 py-8 bg-white shadow-lg rounded-lg"
       >
-        <div className="">
+        <div className=""> 
           <Typography variant="h4" className="text-center">
             Add A Movie
           </Typography>
-
           <TextField
             required
             id="Title"
@@ -313,6 +305,11 @@ export default function MovieInputForm() {
             Create
           </Button>
         </div>
+        {formSubmissionStatus && (
+            <Typography variant="body1" className="text-center mt-4 ">
+              Form submitted successfully <CheckCircleOutlineIcon className="text-green-500" />
+              </Typography>
+          )} 
       </form>
     </>
   )
