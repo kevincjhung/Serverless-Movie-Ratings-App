@@ -288,7 +288,7 @@ export default function MovieInputForm() {
           <TextField
             id="Actors"
             label="Actors"
-            helperText="Separate actor names with commas"
+            helperText="ex. Actor 1, Actor 2"
             className="mt-4 ml-4"
             onChange={handleInputChange}
           />
