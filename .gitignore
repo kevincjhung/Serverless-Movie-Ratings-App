@@ -1,5 +1,4 @@
-TEMP_NOTES.md
-DEVELOPER_NOTES.md
+
 .env
 MovieData.csv
 REQUIREMENTS.md
@@ -8,3 +7,4 @@ movie.csv
 
 node_modules
 
+DEV_NOTES_rough.md
