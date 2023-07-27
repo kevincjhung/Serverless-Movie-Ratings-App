@@ -164,7 +164,9 @@ export default function MovieInputForm() {
         "Votes": 92852,
         "RevenueMillions": 5.62,
         "Metascore": 35
-      }
+      } 
+
+
       
       const requestData = {
         ...formData,
@@ -174,6 +176,7 @@ export default function MovieInputForm() {
         Votes: Number(formData.Votes),
         RevenueMillions: Number(formData.RevenueMillions),
         MetaScore: Number(formData.MetaScore),
+        Genre: 'adventure',
       };
   
     
