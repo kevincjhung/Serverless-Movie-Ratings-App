@@ -164,8 +164,6 @@ export default function MovieInputForm() {
         "Metascore": 35
       }
 
-
-
       const requestData = {
         ...formData,
         Year: Number(formData.Year),
@@ -190,10 +188,12 @@ export default function MovieInputForm() {
         console.log('Form submitted successfully!');
       } else {
         console.error(res);
-      }
+      } 
+      
+ 
+
     } catch (error) {
-      console.log("error")
-      // console.error(error);
+      console.error('Error adding a movie:', error);
     }
   };
 
