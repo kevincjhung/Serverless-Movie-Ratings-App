@@ -141,9 +141,7 @@ public class Function
     )
     {
         var movieData = System.Text.Json.JsonSerializer.Deserialize<Movie>(request.Body);
-        Console.WriteLine("movieData");
-
-        // TODO: refactor validation logic
+        
 
         // if no movieData in body of request, return an error
         if (movieData == null)
@@ -157,26 +155,7 @@ public class Function
 
         Console.WriteLine(request);
 
-        // // if no movie title was given, return an error
-        // if (movieData. == null)
-        // {
-        //     return new APIGatewayHttpApiV2ProxyResponse
-        //     {
-        //         StatusCode = (int)HttpStatusCode.BadRequest,
-        //         Body = System.Text.Json.JsonSerializer.Serialize("Invalid movie title")
-        //     };
-        // }
-
-        // if no description was given, return an error
-        // if (movieData.Description == null)
-        // {
-        //     return new APIGatewayHttpApiV2ProxyResponse
-        //     {
-        //         StatusCode = (int)HttpStatusCode.BadRequest,
-        //         Body = System.Text.Json.JsonSerializer.Serialize("Invalid mo description")
-        //     };
-        // }
-
+      
         try
         {
             // add the movie to the database
@@ -188,8 +167,8 @@ public class Function
             Console.WriteLine(e);
             return new APIGatewayHttpApiV2ProxyResponse
             {
-                StatusCode = (int)HttpStatusCode.Forbidden,
-                Body = System.Text.Json.JsonSerializer.Serialize(movieData)
+                StatusCode = (int)HttpStatusCode.BadRequest,
+                Body = System.Text.Json.JsonSerializer.Serialize(e)
             };
         }
 

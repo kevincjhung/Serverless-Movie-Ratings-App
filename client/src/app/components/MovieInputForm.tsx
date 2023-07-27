@@ -19,16 +19,16 @@ import { Typography } from '@mui/material';
 
 export default function MovieInputForm() {
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    director: '',
-    actors: '',
-    year: '',
-    runtimeMinutes: '',
-    rating: '',
-    votes: '',
-    revenueMillions: '',
-    metaScore: '',
+    Title: '',
+    Description: '',
+    Director: '',
+    Actors: '',
+    Year: '',
+    RuntimeMinutes: '',
+    Rating: '',
+    Votes: '',
+    RevenueMillions: '',
+    MetaScore: '',
   });
 
 
@@ -153,7 +153,7 @@ export default function MovieInputForm() {
       const url = 'https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies';
 
       let fakeFormData = {
-        "Title": "Thomas the train",
+        "Title": "Tomás El Trenito 2",
         "Genre": "adventure",
         "Description": "Black Mamba is an electrifying action-packed thriller that follows the journey of a skilled assassin, known only as Black Mamba.",
         "Director": "Evelyn Hawthorne",
@@ -166,20 +166,24 @@ export default function MovieInputForm() {
         "Metascore": 35
       }
       
-      // Convert keys in formData from lowercase to uppercase
-      let formData = Object.keys(fakeFormData).reduce((acc, key) => {
-        acc[key[0].toUpperCase() + key.slice(1)] = fakeFormData[key];
-        return acc;
-      }, {});
-
-
+      const requestData = {
+        ...formData,
+        Year: Number(formData.Year),
+        RuntimeMinutes: Number(formData.RuntimeMinutes),
+        Rating: Number(formData.Rating),
+        Votes: Number(formData.Votes),
+        RevenueMillions: Number(formData.RevenueMillions),
+        MetaScore: Number(formData.MetaScore),
+      };
+  
+    
 
       console.log('form data: \n')
-      console.log(formData)
+      console.log(requestData)
 
       let res = await fetch(url, {
         method: 'POST',
-        body: JSON.stringify(formData),
+        body: JSON.stringify(requestData),
         cache: "no-store",
         headers: {
           'Content-Type': 'application/json',
@@ -197,7 +201,6 @@ export default function MovieInputForm() {
   };
 
 
-
   return (
     <>
       <form
@@ -211,13 +214,13 @@ export default function MovieInputForm() {
 
           <TextField
             required
-            id="title"
+            id="Title"
             label="Title"
             onChange={handleInputChange}
             className="mt-4 ml-4"
           />
           <TextField
-            id="year"
+            id="Year"
             label="Year"
             type="number"
             InputLabelProps={{
@@ -227,7 +230,7 @@ export default function MovieInputForm() {
             onChange={handleInputChange}
           />
           <TextField
-            id="runtimeMinutes"
+            id="RuntimeMinutes"
             label="Runtime Minutes"
             type="number"
             InputLabelProps={{
@@ -237,7 +240,7 @@ export default function MovieInputForm() {
             onChange={handleInputChange}
           />
           <TextField
-            id="rating"
+            id="Rating"
             label="Rating"
             type="number"
             InputLabelProps={{
@@ -247,7 +250,7 @@ export default function MovieInputForm() {
             onChange={handleInputChange}
           />
           <TextField
-            id="votes"
+            id="Votes"
             label="Votes"
             type="number"
             InputLabelProps={{
@@ -267,7 +270,7 @@ export default function MovieInputForm() {
             onChange={handleInputChange}
           />
           <TextField
-            id="revenueMillions"
+            id="RevenueMillions"
             label="Revenue (Millions)"
             type="number"
             InputLabelProps={{
@@ -278,13 +281,13 @@ export default function MovieInputForm() {
           />
 
           <TextField
-            id="director"
+            id="Director"
             label="Director"
             className="mt-4 ml-4"
             onChange={handleInputChange}
           />
           <TextField
-            id="actors"
+            id="Actors"
             label="Actors"
             helperText="Separate actor names with commas"
             className="mt-4 ml-4"
@@ -292,7 +295,7 @@ export default function MovieInputForm() {
           />
         </div>
         <TextField
-          id="description"
+          id="Description"
           label="Description"
           multiline
           rows={4}
