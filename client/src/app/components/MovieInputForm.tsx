@@ -10,11 +10,16 @@ import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { Typography } from '@mui/material';
 
+/**
+ * POST request on thunderclient works
+ * POST request with pre-written form data works
+ * 
+ */
+
 
 export default function MovieInputForm() {
   const [formData, setFormData] = useState({
     title: '',
-    genre: '',
     description: '',
     director: '',
     actors: '',
@@ -26,7 +31,7 @@ export default function MovieInputForm() {
     metaScore: '',
   });
 
-  // TODO: This would later be replaced with a call to an API to get the list of genres
+
   const movieGenres = [
     {
       value: 'adventure',
@@ -111,21 +116,26 @@ export default function MovieInputForm() {
   ];
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    
+
     // figure out the id of the input field that was changed
     const id = event.target.id;
-    
     const inputValue = event.target.value;
 
-    // convert the values to the correct types for runtimeMinutes,rating,votes,revenueMillions,metaScore
-    if (id === 'runtimeMinutes' || id === 'rating' || id === 'votes' || id === 'revenueMillions' || id === 'metaScore') {
+    // convert the values to the correct types for runtimeMinutes, rating, votes, revenueMillions, metaScore
+    if (
+      id === 'runtimeMinutes' ||
+      id === 'rating' ||
+      id === 'votes' ||
+      id === 'revenueMillions' ||
+      id === 'metaScore'
+    ) {
+      const numericValue = inputValue.trim() === '' ? '' : Number(inputValue);
       setFormData({
         ...formData,
-        [id]: Number(inputValue),
+        [id]: numericValue,
       });
       return;
     }
-    console.log(typeof(formData.title))
 
     // update the state
     setFormData({
@@ -133,7 +143,7 @@ export default function MovieInputForm() {
       [id]: inputValue,
     });
 
-    console.log(formData)    
+    console.log(formData)
   };
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -141,7 +151,32 @@ export default function MovieInputForm() {
 
     try {
       const url = 'https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies';
-   
+
+      let fakeFormData = {
+        "Title": "Thomas the train",
+        "Genre": "adventure",
+        "Description": "Black Mamba is an electrifying action-packed thriller that follows the journey of a skilled assassin, known only as Black Mamba.",
+        "Director": "Evelyn Hawthorne",
+        "Actors": "Saoirse Ronan, Max Irons, Jake Abel, Diane Kruger",
+        "Year": 2014,
+        "RuntimeMinutes": 122,
+        "Rating": 6,
+        "Votes": 92852,
+        "RevenueMillions": 5.62,
+        "Metascore": 35
+      }
+      
+      // Convert keys in formData from lowercase to uppercase
+      let formData = Object.keys(fakeFormData).reduce((acc, key) => {
+        acc[key[0].toUpperCase() + key.slice(1)] = fakeFormData[key];
+        return acc;
+      }, {});
+
+
+
+      console.log('form data: \n')
+      console.log(formData)
+
       let res = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(formData),
@@ -150,7 +185,6 @@ export default function MovieInputForm() {
           'Content-Type': 'application/json',
         }
       }).then((res) => res.json())
-
 
       if (res.ok) {
         console.log('Form submitted successfully!');
@@ -166,7 +200,7 @@ export default function MovieInputForm() {
 
   return (
     <>
-      <form 
+      <form
         onSubmit={handleFormSubmit}
         className="max-w-lg mx-auto mt-8 px-4 py-8 bg-white shadow-lg rounded-lg"
       >
@@ -175,13 +209,12 @@ export default function MovieInputForm() {
             Add A Movie
           </Typography>
 
-        <TextField
+          <TextField
             required
             id="title"
             label="Title"
-            
             onChange={handleInputChange}
-            className="mt-4 ml-4" 
+            className="mt-4 ml-4"
           />
           <TextField
             id="year"
@@ -190,7 +223,7 @@ export default function MovieInputForm() {
             InputLabelProps={{
               shrink: true,
             }}
-            className="mt-4 ml-4" 
+            className="mt-4 ml-4"
             onChange={handleInputChange}
           />
           <TextField
@@ -200,7 +233,7 @@ export default function MovieInputForm() {
             InputLabelProps={{
               shrink: true,
             }}
-            className="mt-4 ml-4" 
+            className="mt-4 ml-4"
             onChange={handleInputChange}
           />
           <TextField
@@ -210,7 +243,7 @@ export default function MovieInputForm() {
             InputLabelProps={{
               shrink: true,
             }}
-            className="mt-4 ml-4" 
+            className="mt-4 ml-4"
             onChange={handleInputChange}
           />
           <TextField
@@ -220,7 +253,7 @@ export default function MovieInputForm() {
             InputLabelProps={{
               shrink: true,
             }}
-            className="mt-4 ml-4" 
+            className="mt-4 ml-4"
             onChange={handleInputChange}
           />
           <TextField
@@ -230,7 +263,7 @@ export default function MovieInputForm() {
             InputLabelProps={{
               shrink: true,
             }}
-            className="mt-4 ml-4" 
+            className="mt-4 ml-4"
             onChange={handleInputChange}
           />
           <TextField
@@ -240,34 +273,21 @@ export default function MovieInputForm() {
             InputLabelProps={{
               shrink: true,
             }}
-            className="mt-4 ml-4" 
+            className="mt-4 ml-4"
             onChange={handleInputChange}
           />
-          <TextField
-            id="genre"
-            label="Genre"
-            select
-            defaultValue="Adventure"
-            className="mt-4 ml-4" 
-            onChange={handleInputChange}
-          >
-            {movieGenres.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+
           <TextField
             id="director"
             label="Director"
-            className="mt-4 ml-4" 
+            className="mt-4 ml-4"
             onChange={handleInputChange}
           />
           <TextField
             id="actors"
             label="Actors"
             helperText="Separate actor names with commas"
-            className="mt-4 ml-4" 
+            className="mt-4 ml-4"
             onChange={handleInputChange}
           />
         </div>
