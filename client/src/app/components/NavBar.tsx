@@ -25,9 +25,9 @@ export default async function NavBar() {
 				<NavBarMenu 
           items={[  
           { label: 'Home', link: '/' },
-          { label: 'Add A Movie', link: '/add_movie' },
-          { label: 'About', link: '/' },
-          { label: 'Contact', link: '/' },
+          { label: 'Add A Movie', link: '/add_movie' }
+        //   { label: 'About', link: '/' },
+        //   { label: 'Contact', link: '/' },
         ]} />
 					<Typography variant="h5" component="div" sx={{ flexGrow: 1 }}  >
 						Movie Ratings App
