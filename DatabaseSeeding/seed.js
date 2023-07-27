@@ -1,3 +1,13 @@
+/**
+ * This code is used to seed the database of the project with movie data from a CSV file. 
+ * It reads the CSV file, parses its content into JSON objects, and then sends each movie 
+ * entry as a POST request to an API endpoint 
+ * (https://kutu61dwp5.execute-api.ca-central-1.amazonaws.com/movies). 
+ * Before sending, it converts certain fields to appropriate data types (e.g., converting strings to numbers). 
+ * The code also handles potential errors during the process and introduces a delay between 
+ * requests to prevent throttling.
+ */
+
 // Imports
 const fs = require('fs');
 const Papa = require('papaparse');
@@ -19,7 +29,7 @@ async function parseCSVToJSON(filePath) {
 
   let listOfGenres = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 50; i++) {
     const row = jsonData[i];
     const emptyFields = Object.keys(row).filter((key) => !row[key].trim());
     if (emptyFields.length > 0) {
