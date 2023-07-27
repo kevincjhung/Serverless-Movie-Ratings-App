@@ -1,23 +1,15 @@
 "use client"
 
-// Material UI
-import Box from '@mui/material/Box';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
-
-//
-import { useState } from 'react';
 import { Typography } from '@mui/material';
 
-/**
- * POST request on thunderclient works
- * POST request with pre-written form data works
- * 
- */
+
 
 
 export default function MovieInputForm() {
+  const [ratingError, setRatingError] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     Title: '',
     Description: '',
@@ -121,29 +113,35 @@ export default function MovieInputForm() {
     const id = event.target.id;
     const inputValue = event.target.value;
 
+
     // convert the values to the correct types for runtimeMinutes, rating, votes, revenueMillions, metaScore
     if (
-      id === 'runtimeMinutes' ||
-      id === 'rating' ||
-      id === 'votes' ||
-      id === 'revenueMillions' ||
-      id === 'metaScore'
+      id === 'RuntimeMinutes' ||
+      id === 'Rating' ||
+      id === 'Votes' ||
+      id === 'RevenueMillions' ||
+      id === 'MetaScore'
     ) {
       const numericValue = inputValue.trim() === '' ? '' : Number(inputValue);
       setFormData({
         ...formData,
         [id]: numericValue,
       });
+
+      // Validate the rating field separately
+      if (id === 'Rating' && (isNaN(parseInt(inputValue)) || parseInt(inputValue) < 0 || parseInt(inputValue) > 100)) {
+        setRatingError(true);
+      } else {
+        setRatingError(false);
+      }
       return;
     }
 
-    // update the state
+    // Update the state for other fields
     setFormData({
       ...formData,
       [id]: inputValue,
     });
-
-    console.log(formData)
   };
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -164,10 +162,10 @@ export default function MovieInputForm() {
         "Votes": 92852,
         "RevenueMillions": 5.62,
         "Metascore": 35
-      } 
+      }
 
 
-      
+
       const requestData = {
         ...formData,
         Year: Number(formData.Year),
@@ -178,8 +176,8 @@ export default function MovieInputForm() {
         MetaScore: Number(formData.MetaScore),
         Genre: 'adventure',
       };
-  
-    
+
+
 
       console.log('form data: \n')
       console.log(requestData)
@@ -251,6 +249,8 @@ export default function MovieInputForm() {
             }}
             className="mt-4 ml-4"
             onChange={handleInputChange}
+            error={ratingError} // Set the error prop based on the ratingError state
+            helperText={ratingError ? 'Enter a number 0-100' : ''}
           />
           <TextField
             id="Votes"
