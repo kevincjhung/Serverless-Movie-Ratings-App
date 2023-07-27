@@ -19,7 +19,7 @@ async function parseCSVToJSON(filePath) {
 
   let listOfGenres = [];
 
-  for (let i = 0; i < jsonData.length; i++) {
+  for (let i = 0; i < 100; i++) {
     const row = jsonData[i];
     const emptyFields = Object.keys(row).filter((key) => !row[key].trim());
     if (emptyFields.length > 0) {
@@ -52,8 +52,8 @@ async function parseCSVToJSON(filePath) {
       console.error(`Error sending row ${i + 1} to the server:`, error.message);
     }
 
-    // Introduce a 100ms, to prevent throttling
-    await new Promise((resolve) => setTimeout(resolve, 90));
+    // Introduce a delay, to prevent throttling
+    await new Promise((resolve) => setTimeout(resolve, 75));
   }
 
   return jsonData;
