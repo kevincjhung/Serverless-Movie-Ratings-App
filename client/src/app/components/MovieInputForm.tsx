@@ -193,7 +193,7 @@ export default function MovieInputForm() {
  
 
     } catch (error) {
-      console.error('Error adding a movie:', error);
+      console.error('Error adding a movie - ', error);
     }
   };
 
