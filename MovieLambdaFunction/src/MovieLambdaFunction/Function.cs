@@ -267,23 +267,23 @@ public class Function
     )
     {
         // Delete all movies
-        dbContext.Movies.RemoveRange(dbContext.Movies);
-        dbContext.SaveChanges();
+        // dbContext.Movies.RemoveRange(dbContext.Movies);
+        // dbContext.SaveChanges();
 
-        // var movieId = request.PathParameters["id"];
+        var movieId = request.PathParameters["id"];
 
-        // // convert movieId into a GUID
-        // Guid guidMovieId = Guid.Parse(movieId);
+        // convert movieId into a GUID
+        Guid guidMovieId = Guid.Parse(movieId);
 
-        // // check if a movie with that given Id exists
-        // var movie = dbContext.Movies.Find(guidMovieId);
+        // check if a movie with that given Id exists
+        var movie = dbContext.Movies.Find(guidMovieId);
 
-        // // if it exists, delete it
-        // if (movie != null)
-        // {
-        //     dbContext.Movies.Remove(movie);
-        //     dbContext.SaveChanges();
-        // }
+        // if it exists, delete it
+        if (movie != null)
+        {
+            dbContext.Movies.Remove(movie);
+            dbContext.SaveChanges();
+        }
 
         // return a response
         return new APIGatewayHttpApiV2ProxyResponse

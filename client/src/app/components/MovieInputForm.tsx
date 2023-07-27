@@ -177,11 +177,6 @@ export default function MovieInputForm() {
         Genre: 'adventure',
       };
 
-
-
-      console.log('form data: \n')
-      console.log(requestData)
-
       let res = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(requestData),
@@ -197,7 +192,8 @@ export default function MovieInputForm() {
         console.error(res);
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.log("error")
+      // console.error(error);
     }
   };
 
@@ -292,7 +288,7 @@ export default function MovieInputForm() {
           <TextField
             id="Actors"
             label="Actors"
-            helperText="Separate actor names with commas"
+            helperText="ex. Actor 1, Actor 2"
             className="mt-4 ml-4"
             onChange={handleInputChange}
           />
