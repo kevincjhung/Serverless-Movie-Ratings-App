@@ -153,9 +153,6 @@ public class Function
             };
         }
 
-        Console.WriteLine(request);
-
-      
         try
         {
             // add the movie to the database
