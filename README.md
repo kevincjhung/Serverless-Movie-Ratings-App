@@ -55,6 +55,9 @@ Image Source: <a href="https://www.flaticon.com/free-icons/google-play-movie" ti
 
 ### Frontend
 
+The frontend of the application is kept in a separate repository for deployment purposes. You can find it at: 
+https://github.com/kevincjhung/Serverless-movie-ratings-frontend
+
 #### Installation and Setup
 
 To run the frontend locally, follow these steps:

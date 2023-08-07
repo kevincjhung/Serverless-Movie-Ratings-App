@@ -1,10 +1,8 @@
-
 .env
 MovieData.csv
-REQUIREMENTS.md
 scripts.sql
 movie.csv
-
 node_modules
 
 DEV_NOTES_rough.md
+REQUIREMENTS.md
