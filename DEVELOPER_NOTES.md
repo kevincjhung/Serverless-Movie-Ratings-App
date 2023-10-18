@@ -17,7 +17,7 @@
        - [IAM Roles](#iam-roles)
        - [Create a basic lambda function](#create-a-basic-lambda-function)
        - [Fetching Data From The Frontend](#fetching-data-from-the-frontend)
-       - [AWS Cognito for Authentication](#aws-cognito-for-authentication)
+       - [AWS Cognito for Authentication](#aws-cognito-for-authentication)@test
        - [API Gateway Authorization](#api-gateway-authorization)
 
 
@@ -336,3 +336,45 @@ if (request.RequestContext.Authorizer == null || !request.RequestContext.Authori
 ```
 
 With these steps, you have set up an AWS Lambda serverless backend with API Gateway and Cognito authentication for your Next.js client app. The protected pages on the client side will only be accessible to authenticated users.
+
+
+## Testing with jest
+
+### Setup
+
+install packages:
+
+```bash
+ yarn add --save -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom ts-jest
+```
+
+```bash
+ yarn add -D eslint-plugin-testing-library eslint-plugin-jest-dom
+```
+
+create jest.setup.js, then add the following line
+
+```import '@testing-library/jest-dom'```
+
+Add this to jest.config.mjs
+
+
+```js
+import nextJest from 'next/jest.js'
+ 
+const createJestConfig = nextJest({
+  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
+  dir: './',
+})
+ 
+// Add any custom config to be passed to Jest
+/** @type {import('jest').Config} */
+const config = {
+  // Add more setup options before each test is run
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testEnvironment: 'jest-environment-jsdom',
+}
+ 
+// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+export default createJestConfig(config)
+```
